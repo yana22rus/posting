@@ -1,4 +1,4 @@
-from os import getcwd,devnull
+from os import getcwd,devnull,listdir
 import os.path
 from time import sleep
 from random import randint,choice
@@ -55,7 +55,9 @@ while 1:
 
             driver.find_element_by_name('message').send_keys(f"#{choice(hashtag)}")
 
-            img = os.path.join(getcwd(),"img",f"photo{randint(1,491)}.jpg")
+            count_file = len(listdir(os.path.join(getcwd(),"img")))
+
+            img = os.path.join(getcwd(),"img",f"photo{randint(1,count_file)}.jpg")
 
             driver.find_element_by_css_selector(".inline_upload").send_keys(img)
 
