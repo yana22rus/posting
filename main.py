@@ -37,9 +37,9 @@ while 1:
 
         pub = f.readlines()
 
-    for x in range(len(pub)):
+    for x in range(2):
 
-        for x in range(2):
+        for x in range(len(pub)):
 
             driver.get(pub[x].strip())
 
