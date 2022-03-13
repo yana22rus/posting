@@ -33,38 +33,48 @@ sleep(1)
 
 while 1:
 
-    with open("pub.txt") as f:
+    try:
 
-        pub = f.readlines()
+        with open("pub.txt") as f:
 
-    for x in range(2):
+            pub = f.readlines()
 
-        for x in range(len(pub)):
+        for x in range(2):
 
-            driver.get(pub[x].strip())
+            for x in range(len(pub)):
 
-            sleep(2)
+                driver.get(pub[x].strip())
 
-            driver.find_element_by_css_selector('.new_post_placeholder__text').click()
+                sleep(2)
 
-            sleep(1)
+                driver.find_element_by_css_selector('.new_post_placeholder__text').click()
 
-            with open("hashtag.txt") as f:
+                sleep(1)
 
-                hashtag = f.readlines()
+                with open("hashtag.txt") as f:
 
-            driver.find_element_by_name('message').send_keys(f"#{choice(hashtag)}")
+                    hashtag = f.readlines()
 
-            count_file = len(listdir(os.path.join(getcwd(),"img")))
+                driver.find_element_by_name('message').send_keys(f"#{choice(hashtag)}")
 
-            img = os.path.join(getcwd(),"img",f"photo{randint(1,count_file)}.jpg")
+                count_file = len(listdir(os.path.join(getcwd(),"img")))
 
-            driver.find_element_by_css_selector(".inline_upload").send_keys(img)
+                img = os.path.join(getcwd(),"img",f"photo{randint(1,count_file)}.jpg")
 
-            sleep(5)
+                driver.find_element_by_css_selector(".inline_upload").send_keys(img)
 
-            driver.find_element_by_css_selector('.Btn_theme_regular:nth-child(1)').click()
+                sleep(5)
 
-            sleep(1)
+                driver.find_element_by_css_selector('.Btn_theme_regular:nth-child(1)').click()
+
+                sleep(1)
+
+
+    except Exception as e:
+
+        with open("log.txt", "a") as f:
+
+            f.writelines(f"{e}"+"\n")
+
 
     sleep(3600)
